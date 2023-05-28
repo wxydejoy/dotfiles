@@ -1,4 +1,48 @@
-#!/bin/zsh
+#!/bin/bash
+
+# 检查系统是否已安装Git
+if ! command -v git &> /dev/null; then
+    echo "Git is not installed. Installing Git..."
+    # 根据不同系统类型使用不同的安装命令
+    if [[ $(uname) == "Darwin" ]]; then
+        brew install git
+    elif [[ $(uname) == "Linux" ]]; then
+        # 使用apt-get安装命令
+        sudo apt-get update
+        sudo apt-get install -y git
+    else
+        echo "Unsupported operating system. Please install Git manually."
+        exit 1
+    fi
+fi
+
+# 检查系统是否已安装Zsh
+if ! command -v zsh &> /dev/null; then
+    echo "Zsh is not installed. Installing Zsh..."
+    # 根据不同系统类型使用不同的安装命令
+    if [[ $(uname) == "Darwin" ]]; then
+        brew install zsh
+    elif [[ $(uname) == "Linux" ]]; then
+        # 使用apt-get安装命令
+        sudo apt-get update
+        sudo apt-get install -y zsh
+    else
+        echo "Unsupported operating system. Please install Zsh manually."
+        exit 1
+    fi
+fi
+
+echo "Git and Zsh are installed."
+
+# 检查系统是否已安装Oh My Zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Oh My Zsh is not installed. Installing Oh My Zsh..."
+    # 使用curl命令安装Oh My Zsh
+    sh -c "$(curl -fsSL https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"
+else
+    echo "Oh My Zsh is installed."
+fi
+
 
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
@@ -21,6 +65,21 @@ symlink() {
   fi
 }
 
+
+
+
+# Install zsh-syntax-highlighting plugin
+CURRENT_DIR=`pwd`
+ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
+  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
+  git clone https://gitee.com/asddfdf/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://gitee.com/chenweizhen/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+cd "$CURRENT_DIR"
+
+
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
 for name in aliases gitconfig irbrc rspec zprofile zshrc; do
@@ -31,43 +90,7 @@ for name in aliases gitconfig irbrc rspec zprofile zshrc; do
   fi
 done
 
-# Install zsh-syntax-highlighting plugin
-CURRENT_DIR=`pwd`
-ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
-if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
-  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
-  git clone https://github.com/zsh-users/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting
-fi
-cd "$CURRENT_DIR"
 
-# Symlink VS Code settings and keybindings to the present `settings.json` and `keybindings.json` files
-# If it's a macOS
-if [[ `uname` =~ "Darwin" ]]; then
-  CODE_PATH=~/Library/Application\ Support/Code/User
-# Else, it's a Linux
-else
-  CODE_PATH=~/.config/Code/User
-  # If this folder doesn't exist, it's a WSL
-  if [ ! -e $CODE_PATH ]; then
-    CODE_PATH=~/.vscode-server/data/Machine
-  fi
-fi
-
-for name in settings.json keybindings.json; do
-  target="$CODE_PATH/$name"
-  backup $target
-  symlink $PWD/$name $target
-done
-
-# Symlink SSH config file to the present `config` file for macOS and add SSH passphrase to the keychain
-if [[ `uname` =~ "Darwin" ]]; then
-  target=~/.ssh/config
-  backup $target
-  symlink $PWD/config $target
-  ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-fi
 
 # Refresh the current terminal with the newly installed configuration
 exec zsh
