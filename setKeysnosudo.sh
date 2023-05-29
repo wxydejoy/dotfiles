@@ -2,6 +2,7 @@
 # 判断是否存在.ssh目录
 if [ ! -d "~/.ssh" ]; then
     # 创建.ssh目录
+    echo "mkdir ~/.ssh"
     mkdir ~/.ssh
 fi
 
