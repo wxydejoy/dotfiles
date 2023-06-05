@@ -165,6 +165,7 @@ source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
-
+UNZIP_DISABLE_ZIPBOMB_DETECTION=TRUE
+export UNZIP_DISABLE_ZIPBOMB_DETECTION
 
 setopt nonomatch
