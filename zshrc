@@ -155,7 +155,15 @@ ZSH_DISABLE_COMPFIX=true
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# argcomplete for ros2 & colcon
+source /usr/share/colcon_cd/function/colcon_cd.sh
+export _colcon_cd_root=/opt/ros/humble/
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
+
+# argcomplete for ros2 & colcon
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"
 
 
 

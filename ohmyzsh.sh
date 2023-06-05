@@ -1,38 +1,3 @@
-#!/bin/bash
-
-# 检查系统是否已安装Git
-if ! command -v git &> /dev/null; then
-    echo "Git is not installed. Installing Git..."
-    # 根据不同系统类型使用不同的安装命令
-    if [[ $(uname) == "Darwin" ]]; then
-        brew install git
-    elif [[ $(uname) == "Linux" ]]; then
-        # 使用apt-get安装命令
-        sudo apt-get update
-        sudo apt-get install -y git
-    else
-        echo "Unsupported operating system. Please install Git manually."
-        exit 1
-    fi
-fi
-
-# 检查系统是否已安装Zsh
-if ! command -v zsh &> /dev/null; then
-    echo "Zsh is not installed. Installing Zsh..."
-    # 根据不同系统类型使用不同的安装命令
-    if [[ $(uname) == "Darwin" ]]; then
-        brew install zsh
-    elif [[ $(uname) == "Linux" ]]; then
-        # 使用apt-get安装命令
-        sudo apt-get update
-        sudo apt-get install -y zsh
-    else
-        echo "Unsupported operating system. Please install Zsh manually."
-        exit 1
-    fi
-fi
-
-echo "Git and Zsh are installed."
 
 # 检查系统是否已安装Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -64,20 +29,32 @@ symlink() {
     ln -s $file $link
   fi
 }
+# 检测插件是否已安装
+# Install zsh-autosuggestions plugin
+CURRENT_DIR=`pwd`
+ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
+  echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
+  git clone https://gitee.com/asddfdf/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
 
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
+  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
+  git clone https://gitee.com/asddfdf/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
 
 
 
 # Install zsh-syntax-highlighting plugin
-CURRENT_DIR=`pwd`
-ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
-if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
-  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
-  git clone https://gitee.com/asddfdf/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  git clone https://gitee.com/chenweizhen/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-cd "$CURRENT_DIR"
+# CURRENT_DIR=`pwd`
+# ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+# mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
+# if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
+#   echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
+#   git clone https://gitee.com/asddfdf/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+#   git clone https://gitee.com/chenweizhen/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# fi
+# cd "$CURRENT_DIR"
 
 
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
