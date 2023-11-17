@@ -162,10 +162,18 @@ source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
 
 # argcomplete for ros2 & colcon
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
+# eval "$(register-python-argcomplete3 ros2)"
+# eval "$(register-python-argcomplete3 colcon)"
+# complete -o nospace -o default -F _python_argcomplete "ros2"
 
 UNZIP_DISABLE_ZIPBOMB_DETECTION=TRUE
 export UNZIP_DISABLE_ZIPBOMB_DETECTION
 
 setopt nonomatch
+
+ros2h
+
+source /usr/share/gazebo-11/setup.sh
+
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"

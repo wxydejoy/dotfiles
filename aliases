@@ -9,7 +9,21 @@ alias ros2f="source /opt/ros/foxy/setup.zsh"
 alias ros2h="source /opt/ros/humble/setup.zsh"
 
 # in X3PI ROS2
-alias tros="source /opt/ros/foxy/setup.zsh && source /opt/tros/setup.zsh"
+# alias tros="source /opt/ros/foxy/setup.zsh && source /opt/tros/setup.zsh"
 
+# reboot win 
+alias rebootwin="sudo bash /home/robot/rebootwin.sh"
 
+# wechat
+alias wechat="/home/robot/.fishros/bin/wechat"
 
+# moveit2
+alias ros2mv="source /home/robot/ws_moveit2/install/setup.zsh"
+
+# sudo apt update
+alias sau="sudo apt update"
+alias sauu="sudo apt update"
+alias sai="sudo apt install"
+alias sar="sudo apt remove"
+alias sdi="sudo dpkg -i"
+alias sdr="sudo dpkg -r"
