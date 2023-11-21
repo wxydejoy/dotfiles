@@ -61,7 +61,17 @@ done
 
 # Refresh the current terminal with the newly installed configuration
 
+# 请输入git用户名
+read -p "请输入git用户名:" git_username
+# 请输入git邮箱
+read -p "请输入git邮箱:" git_email
+
+git config --global user.name "$git_username"
+git config --global user.email "$git_email"
+
+
+
 # zsh
-source ~/.zshrc
+# source ~/.zshrc
 echo "👌 Carry on with git setup!"
 exec zsh
