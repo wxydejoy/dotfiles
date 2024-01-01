@@ -27,3 +27,10 @@ alias sai="sudo apt install"
 alias sar="sudo apt remove"
 alias sdi="sudo dpkg -i"
 alias sdr="sudo dpkg -r"
+
+# ros2 
+#　colcon
+alias csi="colcon build --symlink-install && source install/setup.zsh && complete -o nospace -o default -F _python_argcomplete "ros2""
+
+
+
