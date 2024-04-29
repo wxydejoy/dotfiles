@@ -165,24 +165,24 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # argcomplete for ros2 & colcon
-source /usr/share/colcon_cd/function/colcon_cd.sh
-export _colcon_cd_root=/opt/ros/humble/
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+# source /usr/share/colcon_cd/function/colcon_cd.sh
+# export _colcon_cd_root=/opt/ros/humble/
+# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
 
 # argcomplete for ros2 & colcon
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
-complete -o nospace -o default -F _python_argcomplete "ros2"
+# eval "$(register-python-argcomplete3 ros2)"
+# eval "$(register-python-argcomplete3 colcon)"
+# complete -o nospace -o default -F _python_argcomplete "ros2"
 
 UNZIP_DISABLE_ZIPBOMB_DETECTION=TRUE
 export UNZIP_DISABLE_ZIPBOMB_DETECTION
 
 setopt nonomatch
 
-ros2h
+# ros2h
 
-source /usr/share/gazebo-11/setup.sh
+# source /usr/share/gazebo-11/setup.sh
 
 # 判断是否有ROS_VERSION环境变量 如果有则开启argcomplete代码补全
 if [ -n "$ROS_VERSION" ]; then
