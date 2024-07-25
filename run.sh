@@ -20,7 +20,7 @@ GH=https://gh.airun.eu.org/
 CURRENT_DIR=`pwd`
 ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
 
-echo $GH
+# echo $GH
 
 apt() {
   wget https://gitee.com/SuperManito/LinuxMirrors/raw/main/ChangeMirrors.sh && sudo bash ChangeMirrors.sh
@@ -28,7 +28,8 @@ apt() {
 
 
 
-dotfiles() {
+dotfiles( ) {
+  ROS2=$1
   if [ ! -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
     echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
     # git clone  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -53,7 +54,12 @@ dotfiles() {
 
   # source $HOME/.aliases
   # source $HOME/.zshrc
-  
+  if [ $ROS2 ]; then
+    echo "-----> Installing ROS2 related commands..."
+    #  将ros2相关命令添加到.zshrc
+    wget https://gh.airun.eu.org/https://raw.githubusercontent.com/wxydejoy/dotfiles/master/config/ros2 -O $HOME/.ros2
+    echo "source $HOME/.ros2" >> $HOME/.zshrc
+  fi
   # zshrc
   exec zsh
 
@@ -67,8 +73,8 @@ echo "1.apt换源"
 echo "2.安装Git zsh"
 echo "3.安装oh-my-zsh"
 echo "4.配置GitHubHost"
-echo "5.配置dotfiles"
-echo "6.ALL"
+echo "5.配置dotfiles(不包含ROS相关命令)"
+echo "6.配置dotfiles(包含ROS相关命令)"
 
 
 read num
@@ -84,6 +90,7 @@ case $num in
         ;;
     3)
         echo "安装oh-my-zsh"
+        rm -rf ~/.oh-my-zsh
         sh -c "$(wget -O- https://install.ohmyz.sh/)"
         ;;
     4)
@@ -91,18 +98,6 @@ case $num in
         sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts >> /etc/hosts
         ;;
     5)
-        dotfiles
-        ;;
-    6)
-        echo "apt换源"
-        apt
-        echo "安装Git zsh"
-        sudo apt install git zsh -y
-        echo "安装oh-my-zsh"
-        sh -c "$(wget -O- https://install.ohmyz.sh/)"
-        echo "配置GitHubHost"
-        sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts >> /etc/hosts
-        echo "配置dotfiles"
         dotfiles
         ;;
 esac

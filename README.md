@@ -1,6 +1,9 @@
 
 My dotfiles.
 
+## 使用前请修改用户名和邮箱 run.sh
+
+
 ## Usage
 
 ```bash
