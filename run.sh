@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # /**
 #  * @ Author: weiekko
 #  * @ Create Time: 2024-04-29 01:03:05
@@ -99,5 +101,8 @@ case $num in
         ;;
     5)
         dotfiles
+        ;;
+    6)
+        dotfiles 1
         ;;
 esac
