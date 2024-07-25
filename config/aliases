@@ -3,10 +3,6 @@ alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
 
 
-# active ros foxy
-alias ros2f="source /opt/ros/foxy/setup.zsh"
-# active ros2 humble
-alias ros2h="source /opt/ros/humble/setup.zsh"
 
 # in X3PI ROS2
 # alias tros="source /opt/ros/foxy/setup.zsh && source /opt/tros/setup.zsh"
@@ -17,8 +13,6 @@ alias rebootwin="sudo bash /home/robot/rebootwin.sh"
 # wechat
 alias wechat="/home/robot/.fishros/bin/wechat"
 
-# moveit2
-alias ros2mv="source /home/robot/ws_moveit2/install/setup.zsh"
 
 # sudo apt update
 alias sau="sudo apt update"
@@ -27,10 +21,5 @@ alias sai="sudo apt install"
 alias sar="sudo apt remove"
 alias sdi="sudo dpkg -i"
 alias sdr="sudo dpkg -r"
-
-# ros2 
-#　colcon
-alias csi="colcon build --symlink-install && source install/setup.zsh && complete -o nospace -o default -F _python_argcomplete "ros2""
-
 
 

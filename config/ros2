@@ -1,0 +1,29 @@
+
+
+# 判断是否有ROS_VERSION环境变量 如果有则开启argcomplete代码补全
+if [ -n "$ROS_VERSION" ]; then
+    # 判断是否安装了 register-python-argcomplete3
+    if [ -f "/usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh" ]; then
+        # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+        eval "$(register-python-argcomplete3 ros2)"
+        eval "$(register-python-argcomplete3 colcon)"
+    fi
+
+fi
+
+
+# ros2 
+#　colcon
+alias csi="colcon build --symlink-install && source install/setup.zsh && complete -o nospace -o default -F _python_argcomplete "ros2""
+
+
+# moveit2
+alias ros2mv="source /home/robot/ws_moveit2/install/setup.zsh"
+
+
+# active ros foxy
+alias ros2f="source /opt/ros/foxy/setup.zsh"
+# active ros2 humble
+alias ros2h="source /opt/ros/humble/setup.zsh"
+
+alias tros="source /opt/tros/setup.zsh"
