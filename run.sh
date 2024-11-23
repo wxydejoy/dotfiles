@@ -12,7 +12,7 @@
 
 EMAIL=weiekko@gmail.com
 USERNAME=weiekko
-GH=https://raw.staticdn.net/
+GH=https://hub.gitmirror.com/
 
 # if [ $(id -u) -eq 0 ]; then
 #     echo "当前用户是管理员"
