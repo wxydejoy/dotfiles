@@ -12,7 +12,7 @@
 
 EMAIL=weiekko@gmail.com
 USERNAME=weiekko
-GH=https://gh.airun.eu.org/
+GH=https://raw.staticdn.net/
 
 # if [ $(id -u) -eq 0 ]; then
 #     echo "当前用户是管理员"
@@ -51,15 +51,15 @@ dotfiles( ) {
   # 备份并替换alias
   cp $HOME/.zshrc $HOME/.zshrc.bak
   cp $CURRENT_DIR/config/aliases $HOME/.zshrc
-  wget https://gh.airun.eu.org/https://raw.githubusercontent.com/wxydejoy/dotfiles/master/config/zshrc -O $HOME/.zshrc
-  wget https://gh.airun.eu.org/https://raw.githubusercontent.com/wxydejoy/dotfiles/master/config/aliases -O $HOME/.aliases
+  wget https://raw.staticdn.net/wxydejoy/dotfiles/master/config/zshrc -O $HOME/.zshrc
+  wget https://raw.staticdn.net/wxydejoy/dotfiles/master/config/aliases -O $HOME/.aliases
 
   # source $HOME/.aliases
   # source $HOME/.zshrc
   if [ $ROS2 ]; then
     echo "-----> Installing ROS2 related commands..."
     #  将ros2相关命令添加到.zshrc
-    wget https://gh.airun.eu.org/https://raw.githubusercontent.com/wxydejoy/dotfiles/master/config/ros2 -O $HOME/.ros2
+    wget https://raw.staticdn.net/wxydejoy/dotfiles/master/config/ros2 -O $HOME/.ros2
     echo "source $HOME/.ros2" >> $HOME/.zshrc
   fi
   # zshrc
