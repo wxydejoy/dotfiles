@@ -97,6 +97,7 @@ case $num in
         ;;
     4)
         echo "配置GitHubHost"
+        git config --global http.postBuffer 536870912
         sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts >> /etc/hosts
         ;;
     5)
